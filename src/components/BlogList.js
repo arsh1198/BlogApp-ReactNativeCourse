@@ -9,7 +9,7 @@ const BlogList = ({ data }) => {
         keyExtractor={blogPost => blogPost.title}
         data={data}
         renderItem={({ item }) => {
-          return <Text>{item.title}</Text>
+          return <BlogBody title={item.title} />
         }}
       />
     </View>

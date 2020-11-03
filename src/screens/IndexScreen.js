@@ -6,8 +6,7 @@ import { Context } from '../context/BlogContext'
 const IndexScreen = () => {
   const { state, addBlogPost } = useContext(Context)
   return (
-    <View>
-      <Text>Index Screen!</Text>
+    <View style={{ padding: 20 }}>
       <Button title={'Add post'} onPress={addBlogPost} />
       <BlogList data={state} />
     </View>
