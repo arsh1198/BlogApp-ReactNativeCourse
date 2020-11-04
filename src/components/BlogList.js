@@ -1,18 +1,25 @@
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import BlogBody from './BlogBody'
-
-const BlogList = ({ data }) => {
+const BlogList = ({ data, onIconPress }) => {
   return (
-    <View>
-      <FlatList
-        keyExtractor={blogPost => blogPost.title}
-        data={data}
-        renderItem={({ item }) => {
-          return <BlogBody title={item.title} />
-        }}
-      />
-    </View>
+    <FlatList
+      style={{ marginTop: 10 }}
+      showsVerticalScrollIndicator={false}
+      keyExtractor={blogPost => blogPost.title}
+      data={data}
+      renderItem={({ item }) => {
+        return (
+          <View style={{ marginBottom: 10 }}>
+            <BlogBody
+              title={item.title}
+              onIconPress={onIconPress}
+              id={item.id}
+            />
+          </View>
+        )
+      }}
+    />
   )
 }
 

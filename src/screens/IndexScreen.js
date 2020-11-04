@@ -4,11 +4,22 @@ import BlogList from '../components/BlogList'
 import { Context } from '../context/BlogContext'
 
 const IndexScreen = () => {
-  const { state, addBlogPost } = useContext(Context)
+  const { state, addBlogPost, deleteBlogPost } = useContext(Context)
+  const handleOnIconPress = () => {}
   return (
-    <View style={{ padding: 20 }}>
+    <View
+      style={{
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        backgroundColor: '#fff',
+        flex: 1
+      }}
+    >
+      <Text style={{ fontSize: 25, fontWeight: 'bold', marginBottom: 20 }}>
+        Blog Posts
+      </Text>
       <Button title={'Add post'} onPress={addBlogPost} />
-      <BlogList data={state} />
+      <BlogList data={state} onIconPress={deleteBlogPost} />
     </View>
   )
 }
