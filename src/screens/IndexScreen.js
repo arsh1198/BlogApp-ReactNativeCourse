@@ -1,11 +1,10 @@
 import React, { useContext } from 'react'
-import { FlatList, StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 import BlogList from '../components/BlogList'
 import { Context } from '../context/BlogContext'
 
-const IndexScreen = () => {
+const IndexScreen = ({ navigation }) => {
   const { state, addBlogPost, deleteBlogPost } = useContext(Context)
-  const handleOnIconPress = () => {}
   return (
     <View
       style={{
@@ -19,7 +18,11 @@ const IndexScreen = () => {
         Blog Posts
       </Text>
       <Button title={'Add post'} onPress={addBlogPost} />
-      <BlogList data={state} onIconPress={deleteBlogPost} />
+      <BlogList
+        data={state}
+        onIconPress={deleteBlogPost}
+        navigation={navigation}
+      />
     </View>
   )
 }

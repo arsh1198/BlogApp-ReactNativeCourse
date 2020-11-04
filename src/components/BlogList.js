@@ -1,7 +1,13 @@
 import React from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import BlogBody from './BlogBody'
-const BlogList = ({ data, onIconPress }) => {
+const BlogList = ({ data, onIconPress, navigation }) => {
   return (
     <FlatList
       style={{ marginTop: 10 }}
@@ -10,13 +16,19 @@ const BlogList = ({ data, onIconPress }) => {
       data={data}
       renderItem={({ item }) => {
         return (
-          <View style={{ marginBottom: 10 }}>
-            <BlogBody
-              title={item.title}
-              onIconPress={onIconPress}
-              id={item.id}
-            />
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Show', { id: item.id })}
+          >
+            <View style={{ marginBottom: 10 }}>
+              <BlogBody
+                showBody={false}
+                showIcon={true}
+                title={item.title}
+                onIconPress={onIconPress}
+                id={item.id}
+              />
+            </View>
+          </TouchableOpacity>
         )
       }}
     />
