@@ -8,7 +8,7 @@ const ShowScreen = ({ navigation }) => {
   const id = navigation.getParam('id')
   const blogPost = state.find(blogPost => blogPost.id === id)
   return (
-    <View>
+    <View style={{ paddingHorizontal: 20, paddingTop: 20 }}>
       <BlogBody
         showBody={true}
         showIcon={false}
