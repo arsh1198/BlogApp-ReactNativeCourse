@@ -26,7 +26,14 @@ const BlogBody = ({ title, body, onIconPress, id, showBody, showIcon }) => {
         )}
       </View>
       {showBody && (
-        <View style={{ backgroundColor: '#fff', padding: 20, marginTop: 10 }}>
+        <View
+          style={{
+            backgroundColor: '#fff',
+            padding: 20,
+            marginTop: 20,
+            borderRadius: 5
+          }}
+        >
           <Text style={styles.Body}>{body}</Text>
         </View>
       )}

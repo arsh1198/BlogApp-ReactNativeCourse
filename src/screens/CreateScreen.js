@@ -2,13 +2,20 @@ import React, { useContext, useState } from 'react'
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Context } from '../context/BlogContext'
 
-const CreateScreen = () => {
+const CreateScreen = ({ navigation }) => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
 
   const { addBlogPost } = useContext(Context)
   return (
-    <View style={{ paddingTop: 20, paddingHorizontal: 20 }}>
+    <View
+      style={{
+        paddingTop: 20,
+        paddingHorizontal: 20,
+        flex: 1,
+        backgroundColor: '#fff'
+      }}
+    >
       <>
         <Text style={{ fontSize: 25, fontWeight: 'bold', marginBottom: 20 }}>
           Create a BlogPost
@@ -21,7 +28,7 @@ const CreateScreen = () => {
         />
         <View
           style={{
-            backgroundColor: 'lightgrey',
+            backgroundColor: '#eee',
             marginTop: 20,
             borderRadius: 5,
             height: 150,
@@ -39,7 +46,9 @@ const CreateScreen = () => {
         <Button
           title="Add Post"
           onPress={() => {
-            addBlogPost(title, body)
+            addBlogPost(title, body, () => {
+              navigation.navigate('Index')
+            })
           }}
         />
       </>
@@ -50,7 +59,7 @@ const CreateScreen = () => {
 const styles = StyleSheet.create({
   Title: {
     height: 50,
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#eee',
     borderRadius: 5,
     marginTop: 20,
     paddingHorizontal: 20

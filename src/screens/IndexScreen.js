@@ -5,7 +5,7 @@ import { Context } from '../context/BlogContext'
 import { AntDesign } from '@expo/vector-icons'
 
 const IndexScreen = ({ navigation }) => {
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context)
+  const { state, deleteBlogPost } = useContext(Context)
   return (
     <View
       style={{
@@ -18,7 +18,6 @@ const IndexScreen = ({ navigation }) => {
       <Text style={{ fontSize: 25, fontWeight: 'bold', marginBottom: 20 }}>
         Blog Posts
       </Text>
-      <Button title={'Add post'} onPress={addBlogPost} />
       <BlogList
         data={state}
         onIconPress={deleteBlogPost}
