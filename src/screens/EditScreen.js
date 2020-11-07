@@ -1,13 +1,12 @@
-import React, { useContext, useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useContext } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import BlogPostForm from '../components/BlogPostForm'
 import { Context } from '../context/BlogContext'
 
-const CreateScreen = ({ navigation }) => {
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
-
-  const { addBlogPost } = useContext(Context)
+const EditScreen = ({ navigation }) => {
+  const id = navigation.getParam('id')
+  const { state, editBlogPost } = useContext(Context)
+  const blogPost = state.find(blogPost => blogPost.id === id)
   return (
     <View
       style={{
@@ -18,13 +17,12 @@ const CreateScreen = ({ navigation }) => {
       }}
     >
       <Text style={{ fontSize: 25, fontWeight: 'bold', marginBottom: 20 }}>
-        Create a BlogPost
+        Edit BlogPost
       </Text>
       <BlogPostForm
+        initialValues={{ title: blogPost.title, body: blogPost.body }}
         onSubmit={(title, body) => {
-          addBlogPost(title, body, () => {
-            navigation.navigate('Index')
-          })
+          editBlogPost(id, title, body, () => navigation.pop())
         }}
       />
     </View>
@@ -33,4 +31,4 @@ const CreateScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({})
 
-export default CreateScreen
+export default EditScreen

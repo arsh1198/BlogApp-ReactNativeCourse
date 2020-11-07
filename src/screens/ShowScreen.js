@@ -28,10 +28,14 @@ const ShowScreen = ({ navigation }) => {
   )
 }
 
-ShowScreen.navigationOptions = () => {
+ShowScreen.navigationOptions = ({ navigation }) => {
   return {
     headerRight: () => (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('Edit', { id: navigation.getParam('id') })
+        }
+      >
         <MaterialCommunityIcons
           name={'pencil-circle'}
           style={{ marginEnd: 20 }}
