@@ -1,4 +1,5 @@
 import createDataContext from './createDataContext'
+import jsonServer from '../api/jsonServer'
 
 const blogReducer = (state, action) => {
   switch (action.type) {
@@ -19,6 +20,12 @@ const blogReducer = (state, action) => {
       })
     default:
       return state
+  }
+}
+
+const getBlogPost = dispatch => {
+  return () => {
+    await jsonServer.get('/blogPosts')
   }
 }
 
