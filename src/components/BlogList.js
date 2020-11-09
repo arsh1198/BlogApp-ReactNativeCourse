@@ -16,19 +16,16 @@ const BlogList = ({ data, onIconPress, navigation }) => {
       data={data}
       renderItem={({ item }) => {
         return (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Show', { id: item.id })}
-          >
-            <View style={{ marginBottom: 10 }}>
-              <BlogBody
-                showBody={false}
-                showIcon={true}
-                title={item.title}
-                onIconPress={onIconPress}
-                id={item.id}
-              />
-            </View>
-          </TouchableOpacity>
+          <View style={{ marginBottom: 10 }}>
+            <BlogBody
+              onPress={navigation.navigate}
+              showBody={false}
+              showIcon={true}
+              title={item.title}
+              onIconPress={onIconPress}
+              id={item.id}
+            />
+          </View>
         )
       }}
     />

@@ -1,17 +1,11 @@
 import createDataContext from './createDataContext'
 import jsonServer from '../api/jsonServer'
+import { call } from 'react-native-reanimated'
 
 const blogReducer = (state, action) => {
   switch (action.type) {
-    case 'add_blogPost':
-      return [
-        ...state,
-        {
-          id: Math.floor(Math.random() * 99999),
-          title: action.payload.title,
-          body: action.payload.body
-        }
-      ]
+    case 'get_blogPosts':
+      return action.payload
     case 'delete_blogPost':
       return state.filter(blogPost => blogPost.id !== action.payload)
     case 'edit_blogPost':
@@ -23,33 +17,37 @@ const blogReducer = (state, action) => {
   }
 }
 
-const getBlogPost = dispatch => {
-  return () => {
-    await jsonServer.get('/blogPosts')
+const getBlogPosts = dispatch => {
+  return async () => {
+    const response = await jsonServer.get('/blogPosts')
+    dispatch({ type: 'get_blogPosts', payload: response.data })
   }
 }
 
 const addBlogPost = dispatch => {
   return (title, body, callback) => {
-    dispatch({ type: 'add_blogPost', payload: { title, body } })
-    callback()
+    jsonServer.post('/blogPosts', { title, body })
+    if (callback) callback()
   }
 }
 const deleteBlogPost = dispatch => {
-  return id => {
+  return async id => {
+    await jsonServer.delete(`/blogPosts/${id}`)
     dispatch({ type: 'delete_blogPost', payload: id })
   }
 }
 
 const editBlogPost = dispatch => {
-  return (id, title, body, callback) => {
+  return async (id, title, body, callback) => {
+    await jsonServer.put(`/blogPosts/${id}`, { title, body })
     dispatch({ type: 'edit_blogPost', payload: { id, title, body } })
     callback()
   }
 }
 
-export const { Context, Provider } = createDataContext(
-  blogReducer,
-  { addBlogPost, deleteBlogPost, editBlogPost },
-  [{ title: 'Sample Blog!', body: 'A sample Blog body..', id: 1 }]
-)
+export const { Context, Provider } = createDataContext(blogReducer, {
+  addBlogPost,
+  deleteBlogPost,
+  editBlogPost,
+  getBlogPosts
+})

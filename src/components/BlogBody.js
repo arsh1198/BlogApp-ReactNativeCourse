@@ -3,7 +3,15 @@ import { StyleSheet, Text, View } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const BlogBody = ({ title, body, onIconPress, id, showBody, showIcon }) => {
+const BlogBody = ({
+  title,
+  body,
+  onIconPress,
+  id,
+  showBody,
+  showIcon,
+  onPress
+}) => {
   return (
     <View style={styles.BlogBodyContainer}>
       <View
@@ -13,7 +21,9 @@ const BlogBody = ({ title, body, onIconPress, id, showBody, showIcon }) => {
           justifyContent: 'space-between'
         }}
       >
-        <Text style={styles.Title}>{title}</Text>
+        <TouchableOpacity onPress={() => onPress('Show', { id })}>
+          <Text style={styles.Title}>{title}</Text>
+        </TouchableOpacity>
         {showIcon && (
           <TouchableOpacity onPress={() => onIconPress(id)}>
             <MaterialIcons
